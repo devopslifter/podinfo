@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: devopslifter/podinfo:dev-${{ github.sha }}
+          tags: devopslifter/podinfo:${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s)
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
