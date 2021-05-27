@@ -1,9 +1,9 @@
-name: ci for podinfo
+name: Build and push Docker image upon release
 
 on:
-  push:
-    branches:
-      - 'master'
+  # Build and push Docker images *only* for releases.
+  release:
+    types: [published]
 
 jobs:
   docker:
@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: devopslifter/podinfo:dev-${{ github.sha }}
+          tags: devopslifter/podinfo:${{ steps.get_version.outputs.VERSION }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
