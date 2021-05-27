@@ -31,7 +31,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: devopslifter/podinfo:main-${{ steps.slug.outputs.sha7 }}"
+          image_name: podinfo
+          tags:  "latest,main-{{ steps.slug.outputs.sha7 }}"
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
